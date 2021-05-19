@@ -30,6 +30,9 @@ public class ContatoController {
 
             contatoRepository.save(contato);
 
-        return null;
+            ModelAndView modelAndView = new ModelAndView("detalhes");
+
+            modelAndView.addObject("contato", contato);
+        return modelAndView;
     }
 }
