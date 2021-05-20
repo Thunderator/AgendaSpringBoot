@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,6 +27,22 @@ public class ContatoController {
 
         modelAndView.addObject("lista", lista);
 
+        return modelAndView;
+    }
+
+    @GetMapping(value = "/detalhes/{id}")
+    public ModelAndView getDetalhes(@PathVariable Long id) {
+        // ler contato do banco pelo id
+        Contato contato = new Contato();
+        contato = contatoRepository.findById(id).get();
+
+        // instanciar o template
+        ModelAndView modelAndView = new ModelAndView("detalhes");
+
+        // preencher o template com o contato selecionado
+        modelAndView.addObject("contato", contato);
+
+        // retornar o template
         return modelAndView;
     }
 
