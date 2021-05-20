@@ -9,10 +9,9 @@
 </head>
 <body>
     <h1>Agenda</h1>
+
     <ul>
-        <li>nome - tipo - telefone</li>
-        <li>nome - tipo - telefone</li>
-        <li>nome - tipo - telefone</li>
+        <li th:each="contato : ${lista}" th:text="${contato.nome}"></li>
     </ul>
 
     <a href="/cadastro">Novo Contato</a>
