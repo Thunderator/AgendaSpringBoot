@@ -1,5 +1,8 @@
 package br.edu.usj.ads.pw.agenda;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +15,19 @@ public class ContatoController {
 
     @Autowired
     ContatoRepository contatoRepository;
+
+    @GetMapping(value = "/")
+    public ModelAndView getIndex() {
+        List<Contato> lista = new ArrayList<>();
+
+        lista = contatoRepository.findAll();
+
+        ModelAndView modelAndView = new ModelAndView("index");
+
+        modelAndView.addObject("lista", lista);
+
+        return modelAndView;
+    }
 
     @GetMapping(value = "/cadastro")
     public ModelAndView getCadastro() {
