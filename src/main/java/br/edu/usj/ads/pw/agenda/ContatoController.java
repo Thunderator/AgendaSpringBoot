@@ -46,26 +46,43 @@ public class ContatoController {
         return modelAndView;
     }
 
+    @GetMapping(value = "/editar/{id}")
+    public ModelAndView getEditar(@PathVariable Long id) {
+        Contato contato = new Contato();
+        contato = contatoRepository.findById(id).get();
+
+        ModelAndView modelAndView = new ModelAndView("cadastro");
+        modelAndView.addObject("contato", contato);
+
+        return modelAndView;
+    }
+
     @GetMapping(value = "/cadastro")
     public ModelAndView getCadastro() {
+        Contato contato = new Contato();
+
         ModelAndView modelAndView = new ModelAndView("cadastro");
+
+        modelAndView.addObject("contato", contato);
+
         return modelAndView;
     }
 
     @PostMapping(value = "/adicionar")
-    public ModelAndView postAdicionar(@RequestParam String nome, @RequestParam String tipo,
-            @RequestParam String telefone) {
-                Contato contato = new Contato();
+    public ModelAndView postAdicionar(Contato contato) {
+        contatoRepository.save(contato);
 
-            contato.setNome(nome);
-            contato.setTipo(tipo);
-            contato.setTelefone(telefone);
+        ModelAndView modelAndView = new ModelAndView("detalhes");
 
-            contatoRepository.save(contato);
-
-            ModelAndView modelAndView = new ModelAndView("detalhes");
-
-            modelAndView.addObject("contato", contato);
+        modelAndView.addObject("contato", contato);
         return modelAndView;
+    }
+
+    @GetMapping(value = "/remover/{id}")
+    public String getRemover(@PathVariable Long id) {
+
+        contatoRepository.deleteById(id);
+
+        return "redirect:/";
     }
 }
