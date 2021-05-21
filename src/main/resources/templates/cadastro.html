@@ -9,15 +9,17 @@
 <body>
     <h1>Agenda</h1>
 
-    <form method="POST" action="adicionar">
+    <form method="POST" action="/adicionar">
         <label for="nome">Nome:</label>
-        <input type="text" name="nome" id="nome" />
+        <input type="text" name="nome" id="nome" th:value="${contato.nome}" />
 
         <label for="tipo">Tipo:</label>
-        <input type="text" name="tipo" id="tipo" />
+        <input type="text" name="tipo" id="tipo" th:value="${contato.tipo}" />
 
         <label for="telefone">Telefone:</label>
-        <input type="text" name="telefone" id="telefone" />
+        <input type="text" name="telefone" id="telefone" th:value="${contato.telefone}" />
+
+        <input type="hidden" name="id" id="id" th:value="${contato.id}" />
 
         <input type="submit" value="Salvar">
     </form>
