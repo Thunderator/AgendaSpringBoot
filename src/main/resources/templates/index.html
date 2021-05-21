@@ -14,7 +14,7 @@
         <li th:each="contato : ${lista}">
             <a th:href="@{/detalhes/{id}(id=${contato.id})}" th:text="${contato.nome}"></a>
             <a th:href="@{/editar/{id}(id=${contato.id})}">Editar</a>
-            <a th:href="@{/deletar/{id}(id=${contato.id})}">Deletar</a>
+            <a th:href="@{/remover/{id}(id=${contato.id})}">Remover</a>
         </li>
     </ul>
 
